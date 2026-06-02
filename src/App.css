@@ -373,77 +373,269 @@
 }
 
 /* ============================================================
-   CERTIFICATION CARDS
+   CREDENTIAL CARDS (Certificate-style)
    ============================================================ */
 .cert-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 1.75rem;
 }
 
-.cert-card {
+.credential-card {
+  position: relative;
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
+  border-radius: var(--radius-xl);
+  padding: 2rem 1.75rem 1.25rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
   transition: var(--transition-slow);
+  overflow: visible;
   cursor: pointer;
 }
 
-.cert-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
+.credential-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.1);
   border-color: transparent;
 }
 
-.cert-card-image-wrapper {
-  height: 180px;
-  overflow: hidden;
+/* Decorative inner frame */
+.credential-card::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius-xl) - 6px);
+  pointer-events: none;
+  opacity: 0.5;
+  transition: var(--transition);
+}
+
+.credential-card:hover::before {
+  opacity: 0.8;
+  border-color: #0078d4;
+}
+
+/* Corner decorations */
+.credential-corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: #0078d4;
+  border-style: solid;
+  opacity: 0.5;
+  transition: var(--transition);
+}
+
+.credential-card:hover .credential-corner {
+  opacity: 0.9;
+}
+
+.credential-corner.tl { top: 12px; left: 12px; border-width: 2px 0 0 2px; border-radius: 4px 0 0 0; }
+.credential-corner.tr { top: 12px; right: 12px; border-width: 2px 2px 0 0; border-radius: 0 4px 0 0; }
+.credential-corner.bl { bottom: 12px; left: 12px; border-width: 0 0 2px 2px; border-radius: 0 0 0 4px; }
+.credential-corner.br { bottom: 12px; right: 12px; border-width: 0 2px 2px 0; border-radius: 0 0 4px 0; }
+
+/* Issuer header */
+.credential-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+  z-index: 1;
+  position: relative;
+}
+
+.credential-issuer-logo {
+  fill: #0078d4;
+  width: 18px;
+  height: 18px;
+}
+
+.credential-issuer-icon {
+  color: #4285f4;
+  font-size: 1rem;
+}
+
+.credential-issuer-name {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Badge area */
+.credential-badge-area {
+  width: 88px;
+  height: 88px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fafafa;
-  padding: 1.25rem;
+  margin-bottom: 0.75rem;
+  position: relative;
+  z-index: 1;
 }
 
-.cert-card-image {
-  max-width: 100%;
-  max-height: 100%;
+.credential-badge-area::before {
+  content: '';
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: rgba(0, 120, 212, 0.07);
+  transition: var(--transition);
+}
+
+.credential-card:hover .credential-badge-area::before {
+  transform: scale(1.2);
+  background: rgba(0, 120, 212, 0.12);
+}
+
+.credential-badge {
+  width: 76px;
+  height: 76px;
   object-fit: contain;
-  transition: var(--transition-slow);
+  position: relative;
+  z-index: 1;
+  transition: transform var(--transition);
 }
 
-.cert-card:hover .cert-card-image {
-  transform: scale(1.04);
+.credential-card:hover .credential-badge {
+  transform: scale(1.06);
 }
 
-.cert-card-body {
-  padding: 1.25rem 1.5rem 1.5rem;
+.credential-badge-fallback {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4285f4, #34a853);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.5rem;
+  position: relative;
+  z-index: 1;
 }
 
-.cert-card-title {
+/* Certificate body */
+.credential-body {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.credential-passed {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+  font-style: italic;
+}
+
+.credential-title {
   font-size: 1rem;
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 0.25rem;
+  line-height: 1.4;
+  margin-bottom: 0.75rem;
 }
 
-.cert-card-issuer {
-  font-size: 0.88rem;
-  color: var(--text-muted);
+/* Status row */
+.credential-status-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
 }
 
-.cert-card-badge {
+.credential-verify-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  margin-top: 0.75rem;
-  padding: 0.3rem 0.75rem;
-  background: var(--primary-bg);
-  color: var(--primary);
+  padding: 0.25rem 0.75rem;
+  background: rgba(16, 185, 129, 0.08);
+  color: #059669;
   border-radius: 100px;
-  font-size: 0.8rem;
-  font-weight: 500;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.credential-verify-badge i {
+  font-size: 0.72rem;
+}
+
+/* Meta details */
+.credential-details {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 0.75rem;
+  padding: 0.75rem;
+  background: var(--bg);
+  border-radius: var(--radius-md);
+}
+
+.credential-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.credential-detail-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.credential-detail-value {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+}
+
+/* Credential ID row */
+.credential-id-row {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+/* Footer */
+.credential-footer {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+}
+
+.credential-footer-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin-bottom: 0.6rem;
+}
+
+.credential-footer-text {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  transition: var(--transition);
+}
+
+.credential-card:hover .credential-footer-text {
+  color: var(--primary);
 }
 
 /* ============================================================

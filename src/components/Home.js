@@ -32,7 +32,7 @@ const Home = () => {
               A Data Analyst &middot; <span className="highlight">Insights Architect</span>
             </h2>
             <p className="hero-description animate-in delay-3">
-              I turn raw data into actionable insights. With 2+ years of experience in 
+              I turn raw data into actionable insights. With 4+ years of experience in 
               data manipulation, visualization, and machine learning, I help organizations 
               make data-driven decisions that matter.
             </p>

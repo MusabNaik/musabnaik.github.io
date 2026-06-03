@@ -7,7 +7,7 @@ const projects = [
       'Scraped detailed store info (addresses, hours, features) from the Tim Hortons website using Python. Built an interactive Folium map with zoom, scroll, and click-to-view popups for every store location.',
     image: 'https://raw.githubusercontent.com/MusabNaik/TimHortons-WebScraping/main/images/Tim_Hortons_Map.png',
     repo: 'https://github.com/MusabNaik/TimHortons-WebScraping',
-    demo: 'https://musabnaik.com/TimHortons-WebScraping/',
+    demo: 'https://timhortons-webscraping.streamlit.app/',
     tags: ['Python', 'Folium', 'Web Scraping', 'BeautifulSoup'],
   },
   {

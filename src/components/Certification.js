@@ -2,6 +2,20 @@ import React from 'react';
 
 const certifications = [
   {
+    id: 'dp-750',
+    title: 'Azure Databricks Data Engineer Associate',
+    fullTitle: 'Microsoft Certified: Azure Databricks Data Engineer Associate',
+    issuer: 'Microsoft',
+    badgeUrl: 'https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-associate-badge.svg',
+    earned: 'September 8, 2026',
+    credentialId: '546F21AB878E1E98',
+    certNumber: 'D3EDG1-586A34',
+    status: 'Active',
+    verifyUrl: 'https://learn.microsoft.com/en-us/users/musabnaik/credentials/546F21AB878E1E98',
+    accent: '#0078d4',
+    category: 'associate',
+  },
+  {
     id: 'dp-100',
     title: 'Azure Data Scientist Associate',
     fullTitle: 'Microsoft Certified: Azure Data Scientist Associate',
